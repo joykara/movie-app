@@ -9,9 +9,24 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        noto: ['var(--font-noto-sans)', 'sans-serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        violet: '#C52184',   // Violet
+        red: '#E50914',    // Netflix Red
+        amber: '#FF8325',  // Amber
+        green: '#197C1C',
+        smoke: '#F2F4F3', // White smoke
+        black: '#050505', // Dark Charcoal
+        eerie: '#212121',  // Dark Gray
+        dim_gray: '#616161', // Medium Gray
+        white: '#FFFFFF',  // White
+        slate: '#6E8894', // Slate Gray
+        peach: '#FFC78F',
       },
     },
   },

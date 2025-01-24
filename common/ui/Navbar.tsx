@@ -31,16 +31,30 @@ export default function Navbar() {
     useOutsideClick(resultsRef, closeResults);
 
     return (
-        <div className="relative w-[95%] h-auto mx-auto flex justify-between items-center px-4 py-4 md:px-12">
+        <div className="relative w-[95%] h-auto mx-auto flex flex-col gap-2 sm:flex-row justify-between items-center px-4 py-4 md:px-12">
             {/* Logo */}
             <Link
                 href={'/dashboard'}
-                className="font-playfair italic text-base sm:text-lg md:text-xl text-black dark:text-smoke"
+                className="font-playfair italic text-base sm:text-lg md:text-xl text-black dark:text-smoke justify-self-start"
             >
                 Movierex
             </Link>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-end gap-2 md:gap-4">
+                <div className='hidden md:flex gap-x-4 mr-4'>
+                    <Link
+                        href={'/dashboard'}
+                        className="font-noto text-sm md:text-base text-black dark:text-smoke hover:text-violet"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        href={'/all-movies'}
+                        className="font-roboto text-sm md:text-base text-black dark:text-smoke hover:text-violet"
+                    >
+                        All movies
+                    </Link>
+                </div>
                 <SearchBar onSearch={handleSearchResults} />
                 {/* Theme Toggle */}
                 <button
@@ -60,15 +74,29 @@ export default function Navbar() {
                         <FaRegUserCircle className="w-6 h-6 fill-violet dark:fill-amber" />
                     </PopoverTrigger>
                     <PopoverContent>
+                        <div className='md:hidden flex'>
+                            <Link
+                                href={'/dashboard'}
+                                className="font-noto text-sm md:text-base text-black dark:text-smoke hover:text-violet"
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                href={'/all-movies'}
+                                className="font-roboto text-sm md:text-base text-black dark:text-smoke hover:text-violet"
+                            >
+                                All movies
+                            </Link>
+                        </div>
                         <Link
                             href={'/login'}
-                            className="block rounded-lg py-2 px-3 transition hover:bg-accent"
+                            className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
                         >
                             Login
                         </Link>
                         <Link
                             href={'/'}
-                            className="block rounded-lg py-2 px-3 transition hover:bg-accent"
+                            className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
                         >
                             Sign out
                         </Link>
@@ -78,21 +106,25 @@ export default function Navbar() {
             {/* Search Results */}
             {isResultsVisible && searchResults.length > 0 && (
                 <div
-                    ref={resultsRef}
-                    className="absolute z-50 bg-white shadow-lg rounded-md mt-2 w-full md:w-96"
+                    className="absolute z-50 bg-white dark:bg-black opacity-50 shadow-lg rounded-md w-full h-full"
                 >
-                    {searchResults.map((movie) => (
-                        <Link
-                            key={movie.id}
-                            className="p-4 border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
-                            href={`/movie/${movie.id}`}
-                        >
-                            <h3 className="text-sm font-bold">{movie.title}</h3>
-                            <p className="text-xs text-gray-500">
-                                {new Date(movie.release_date).getFullYear()}
-                            </p>
-                        </Link>
-                    ))}
+                    <div
+                        ref={resultsRef}
+                        className="bg-white shadow-lg rounded-md mx-auto w-[80%] md:w-1/2 "
+                    >
+                        {searchResults.map((movie) => (
+                            <Link
+                                key={movie.id}
+                                className="p-4 border-b border-gray-200 hover:bg-gray-100 cursor-pointer"
+                                href={`/movie/${movie.id}`}
+                            >
+                                <h3 className="text-sm font-bold">{movie.title}</h3>
+                                <p className="text-xs text-gray-500">
+                                    {new Date(movie.release_date).getFullYear()}
+                                </p>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             )}
 

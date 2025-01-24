@@ -4,7 +4,7 @@ export interface Button {
     border: string
     onClick?: () => void
     disabled?: boolean
-    isLoading?: boolean
+    loading?: boolean
     isValid?: boolean
     type: "submit" | "reset" | "button"
 }

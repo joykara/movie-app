@@ -6,12 +6,12 @@ export default function CommonButton(props: Readonly<Button>) {
         <button
             {...props}
             type={props.type}
-            className={`${props.bg} w-full mt-10 h-14 md:h-16 rounded-md ${props.border} text-white text-xl cursor-pointer ${props.isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            className={`${props.bg} w-24 px-4 py-2 rounded-md ${props.border} text-black text-sm cursor-pointer ${props.loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
-            disabled={props.isLoading}
+            disabled={props.loading}
             onClick={props.onClick}
         >
-            {props.isLoading ? (
+            {props.loading ? (
                 <div className="flex items-center justify-center">
                     <span className="ml-2">Loading...</span>
                 </div>

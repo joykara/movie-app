@@ -26,7 +26,6 @@ export const fetchAllMovies = async () => {
 };
 
 // Fetch movie by id
-// Update the fetchMovieById function
 export const fetchMovieById = async (id: number) => {
     try {
         const movieRes = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
@@ -45,6 +44,21 @@ export const fetchMovieById = async (id: number) => {
         return { movie_details: movieDetails, recommendations: recommendations.results };
     } catch (error) {
         throw new Error(`Error fetching movie data: ${error}`);
+    }
+};
+
+// Movie creds and crew
+export const fetchMovieCredits = async (id: number) => {
+    try {
+        const res = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`);
+
+        if (!res.ok) {
+            throw new Error('Failed to fetch credits');
+        }
+
+        return res.json();
+    } catch (error) {
+        throw new Error(`Error fetching credits: ${error}`);
     }
 };
 

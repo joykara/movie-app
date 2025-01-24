@@ -5,12 +5,14 @@ import { fetchAllMovies, fetchGenres, fetchMoviesByGenre } from '@/services/acti
 import { useRouter } from 'next/navigation';
 import { Genre, Movie } from '@/data/interfaces/components';
 import MovieCard from '../shared/movieCards';
+import Loader from '../shared/loader';
 
 export default function FeaturedMovies() {
     const [genres, setGenres] = useState<Genre[]>([]);
     const [movies, setMovies] = useState<Movie[]>([]);
     const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
     const router = useRouter();
+        const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function getGenres() {
@@ -33,8 +35,26 @@ export default function FeaturedMovies() {
         }
         getMovies();
     }, [selectedGenre]);
-    console.log(movies)
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000); // Simulates loading time (adjust as needed)
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="relative h-[100vh] w-[100vh]">
+                {loading && (
+                    <div className="absolute inset-0 lg:w-40 lg:h-40 flex justify-center items-center bg-white bg-opacity-70 dark:bg-black dark:bg-opacity-70">
+                        <Loader loading={loading} size={40} />
+                    </div>
+                )}
+            </div>
+            )
+    }
     const handleGenreSelect = (genreId: number) => {
         setSelectedGenre(genreId);
     };

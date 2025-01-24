@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MovieDetailsProps } from '@/data/interfaces/components';
 import Image from 'next/image';
 import { FcRating } from 'react-icons/fc';
@@ -8,6 +8,7 @@ import RecommendationFeed from '@/common/shared/recommendationFeed';
 import CastDetailsModal from '@/common/shared/castDetails';
 import CommonButton from '@/common/shared/button';
 import ProfileImage from '@/common/shared/profileImage';
+import Loader from '@/common/shared/loader';
 
 export default function MovieDetailsComponent({
     movie_details,
@@ -18,17 +19,41 @@ export default function MovieDetailsComponent({
     const topCast = credits.cast.slice(0, 4);
     const topCrew = credits.crew.slice(0, 4);
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000); // Simulates loading time (adjust as needed)
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="relative h-[100vh] w-[100vh]">
+                {loading && (
+                    <div className="absolute inset-0 lg:w-40 lg:h-40 flex justify-center items-center bg-white bg-opacity-70 dark:bg-black dark:bg-opacity-70">
+                        <Loader loading={loading} size={40} />
+                    </div>
+                )}
+            </div>
+            )
+    }
 
     return (
         <div className="relative w-full h-full mx-auto px-6 md:px-12 py-4 bg-white dark:bg-black">
             {/* Movie Details Section */}
             <div className="h-full xl:h-[95vh] w-full flex flex-col xl:flex-row items-center justify-between gap-x-2 ">
+
+                {loading && <Loader loading={loading} size={50} />}
                 <Image
                     alt="Movie Image"
                     src={`https://image.tmdb.org/t/p/w1280${movie_details.backdrop_path}`}
                     width={700}
                     height={700}
-                    className="w-full xl:w-1/2 h-full xl:h-[95%] object-cover rounded-md mb-2"
+                    onLoad={() => setLoading(false)}
+                    className={`${loading ? 'hidden' : 'block'} w-full xl:w-1/2 h-full xl:h-[95%] object-cover rounded-md mb-2`}
                 />
                 <div className="w-full md:w-[90%] mx-auto flex flex-col gap-2 xl:ml-4 text-black dark:text-white">
                     <div className="flex flex-col gap-2">
@@ -52,7 +77,7 @@ export default function MovieDetailsComponent({
                     {/* Cast Section */}
                     <div className="flex flex-col gap-4">
                         <h2 className="text-lg md:text-xl font-bold mt-2">Top Cast</h2>
-                        <div className="flex items-center justify-evenly gap-6 overflow-x-scroll no-scrollbar">
+                        <div className="flex items-center justify-evenly gap-x-6 overflow-x-scroll no-scrollbar">
                             {topCast.map((actor) => (
                                 <div key={actor.id} className="flex flex-col items-center">
                                     <ProfileImage profilePath={actor.profile_path} name={actor.name} />
@@ -66,7 +91,7 @@ export default function MovieDetailsComponent({
                     {/* Crew Section */}
                     <div className="flex flex-col gap-4">
                         <h2 className="text-lg md:text-xl font-bold mt-2">Crew</h2>
-                        <div className="flex items-center justify-evenly gap-6 overflow-x-scroll no-scrollbar">
+                        <div className="flex items-center justify-evenly gap-x-6 overflow-x-scroll no-scrollbar">
                             {topCrew.map((crew) => (
                                 <div key={crew.id} className="flex flex-col items-center">
                                     <ProfileImage profilePath={crew.profile_path} name={crew.name} />

@@ -17,24 +17,21 @@ export default function MovieCard({
 
     return (
         <div
-            className="relative w-full min-w-[250px]  h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group"
+            className="relative w-full min-w-[250px] h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group"
             style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterPath})`,
             }}
         >
             {/* Hover Overlay */}
-            <div className="absolute inset-0 text-black dark:text-smoke bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                {/* Title */}
+            <div className="absolute inset-0 text-black dark:text-smoke bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 flex flex-col justify-end p-4 opacity-100 shadow-md md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 <h2 className="text-lg md:text-xl font-bold truncate mb-2">{title}</h2>
 
-                {/* Genres */}
                 {genres.length > 0 && (
                     <div className="text-xs mb-2">
                         {genres.join(', ')} {genres.length > 5 && '...'}
                     </div>
                 )}
 
-                {/* Meta Info */}
                 <div className="flex justify-left items-center font-roboto gap-x-2 text-xs md:text-sm text-black dark:text-smoke mb-4 mt-2">
                     <FcRating />
                     <span>{rating.toFixed(1)} ({votes} votes)</span>
@@ -44,7 +41,6 @@ export default function MovieCard({
                     <span>{runtime}</span>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex w-full gap-2">
                     <Link
                         href={`/movie/${id}`}

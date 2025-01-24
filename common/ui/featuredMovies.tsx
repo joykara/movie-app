@@ -46,12 +46,18 @@ export default function FeaturedMovies() {
                 <h2 className="text-lg md:text-3xl font-playfair font-bold">Featured Movies</h2>
             </div>
             {/* Genre List */}
-            <div className="flex flex-wrap gap-4 mb-6">
+            <div className="w-full flex overflow-x-auto no-scrollbar md:flex-wrap gap-2 md:gap-4 mb-6">
+                <button
+                    onClick={() => router.push('/all-movies')}
+                    className="px-2 py-1 md:px-4 md:py-2 rounded-md text-sm bg-slate min-w-20"
+                >
+                    View All
+                </button>
                 {genres.map((genre) => (
                     <button
                         key={genre.id}
                         onClick={() => handleGenreSelect(genre.id)}
-                        className={`px-4 py-2 rounded-md text-sm ${selectedGenre === genre.id
+                        className={`px-2 py-1 md:px-4 md:py-2 rounded-md text-sm ${selectedGenre === genre.id
                             ? 'bg-violet text-white'
                             : 'bg-white  border border-violet text-black'
                             }`}
@@ -59,12 +65,6 @@ export default function FeaturedMovies() {
                         {genre.name}
                     </button>
                 ))}
-                <button
-                    onClick={() => router.push('/all-movies')}
-                    className="px-4 py-2 rounded-md text-sm bg-slate"
-                >
-                    View All
-                </button>
             </div>
 
             {/* Movie List */}

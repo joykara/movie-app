@@ -4,7 +4,7 @@ import MovieDetailsComponent from './movieDetails';
 export default async function MovieDetailsPage({
     params
 }: Readonly<{ params: { id: number } }>) {
-    const { id } = await params
+    const { id } = params
     const { movie_details, recommendations } = await fetchMovieById(id)
     const credits = await fetchMovieCredits(id);
 

@@ -26,7 +26,7 @@ export const fetchAllMovies = async () => {
 };
 
 // Fetch movie by id
-export const fetchMovieById = async (id: number) => {
+export const fetchMovieById = async (id: string) => {
     try {
         const movieRes = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
         if (!movieRes.ok) {
@@ -48,7 +48,7 @@ export const fetchMovieById = async (id: number) => {
 };
 
 // Movie creds and crew
-export const fetchMovieCredits = async (id: number) => {
+export const fetchMovieCredits = async (id: string) => {
     try {
         const res = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`);
 

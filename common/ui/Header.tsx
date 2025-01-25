@@ -19,7 +19,7 @@ export default async function Header () {
                 }}>
                 <div className='absolute inset-0 bg-white dark:bg-black opacity-30 bg-gradient-to-br from-white dark:from-black to-transparent' />
                     {/* Movie Details */}
-                    <div className="absolute bottom-6 left-10 rounded-md bg-white dark:bg-black p-4 md:p-8 lg:p-12 z-10 flex flex-col space-y-4 w-2/3 sm:w-1/2 lg:w-2/5">
+                    <div className="absolute bottom-6 left-10 rounded-md bg-white dark:bg-black p-4 md:p-8 lg:p-12 z-2 flex flex-col space-y-4 w-2/3 sm:w-1/2 lg:w-2/5">
                         {/* Title */}
                         <h1 className="text-4xl lg:text-5xl font-noto font-bold text-black dark:text-white leading-tight">
                             {movies.title}

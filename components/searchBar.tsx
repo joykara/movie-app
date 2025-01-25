@@ -1,19 +1,31 @@
 'use client'
 import CommonButton from '@/common/shared/button';
+import { Movie } from '@/data/interfaces/components';
+import { showToast } from '@/hooks/useToast';
+import { searchMovies } from '@/services/actions';
 import { useState } from 'react';
 
 interface SearchBarProps {
-    onSearch: (query: string) => void;
+    onSearch: (results: Movie[]) => void;
 }
 
 export default function SearchBar({ onSearch }: SearchBarProps) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [loading, setLoading] = useState<boolean>(false)
     const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearch = () => {
-        if (searchQuery.trim()) {
-            onSearch(searchQuery.trim());
+    const handleSearch = async () => {
+        if (!searchQuery.trim()) {
+            onSearch([]);
+            return;
+        }
+        setLoading(true);
+        try {
+            const results = await searchMovies(searchQuery);
+            onSearch(results.results);
+        } catch (err) {
+            showToast('error', `${err}`);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -24,15 +36,15 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search movies..."
-                className="px-4 py-2 rounded-md bg-white dark:bg-eerie border border-black"
+                className="px-4 py-2 rounded-md bg-white dark:bg-eerie border border-black text-sm text-slate dark:text-smoke"
             />
             <CommonButton
-                type="submit"
+                type="button"
                 title="Search"
                 bg="bg-white hover:bg-violet"
                 border="border border-violet"
-                onClick={handleSearch}
                 loading={loading}
+                onClick={handleSearch}
             />
         </div>
     );

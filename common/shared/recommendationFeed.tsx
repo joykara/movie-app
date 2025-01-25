@@ -24,7 +24,7 @@ export default function RecommendationFeed({ recommendations }: RecommendationFe
         <div className="flex flex-col gap-4">
         <div className='flex items-center gap-2 mb-4'>
             <div className="h-5 w-[0.2rem] bg-violet"></div>
-            <h2 className="text-lg md:text-2xl font-playfair font-bold">You might also like</h2>
+            <h2 className="text-base md:text-lg lg:text-xl font-inter font-semibold">You might also like</h2>
         </div>
             <InfiniteScroll
                 dataLength={displayedRecommendations.length}

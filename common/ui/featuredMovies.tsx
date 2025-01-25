@@ -63,7 +63,7 @@ export default function FeaturedMovies() {
         <div className="w-full flex flex-col items-left justify-center">
             <div className='flex items-center gap-2 mb-4'>
                 <div className="h-5 w-[0.2rem] bg-violet"></div>
-                <h2 className="text-lg md:text-3xl font-playfair font-bold">Featured Movies</h2>
+                <h2 className="text-base md:text-lg lg:text-xl font-inter font-semibold">Featured Movies</h2>
             </div>
             {/* Genre List */}
             <div className="w-full flex overflow-x-auto no-scrollbar md:flex-wrap gap-2 md:gap-4 mb-6">

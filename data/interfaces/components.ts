@@ -35,7 +35,7 @@ export interface MovieCardProps {
     onFavoriteClick?: () => void; // Add to Favorites
 }
 
-export  interface MovieDetailsProps {
+export interface MovieDetailsProps {
     movie_details: {
         title: string;
         overview: string;
@@ -48,7 +48,31 @@ export  interface MovieDetailsProps {
         backdrop_path: string;
     };
     recommendations: Movie[];
+    credits: {
+        cast: CastMember[];
+        crew: CrewMember[];
+    };
 }
+
+export interface Credits {
+    cast: CastMember[];
+    crew: CrewMember[];
+}
+
+export interface CastMember {
+    id: number;
+    name: string;
+    character: string;
+    profile_path: string | null;
+}
+
+export interface CrewMember {
+    id: number;
+    name: string;
+    job: string;
+    profile_path: string | null;
+}
+
 // Genre interface
 export interface Genre {
     id: number;

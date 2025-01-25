@@ -1,45 +1,39 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Roboto, Inter, Noto_Sans, Playfair_Display } from 'next/font/google';
+import { Roboto, Inter, Noto_Sans } from 'next/font/google';
 
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-  variable: '--font-roboto',
+  variable: '--font-roboto'
 });
 
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
-  variable: '--font-inter',
+  variable: '--font-inter'
 });
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-  variable: '--font-noto-sans',
-});
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-playfair',
+  variable: '--font-noto-sans'
 });
 
 export const metadata: Metadata = {
   title: "Movierex",
-  description: "Movie recommendation application",
+  description: "Movie recommendation application"
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${inter.variable} ${notoSans.variable} ${playfair.variable}`}
+        className={`${roboto.variable} ${inter.variable} ${notoSans.variable}`}
         >
         {children}
       </body>

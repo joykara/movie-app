@@ -1,0 +1,14 @@
+{
+  "extends": "next/core-web-vitals",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "react-hooks/rules-of-hooks": "off"
+  },
+  "ignorePatterns": [
+    "app/(movierex)/movie/[id]/page.tsx"
+  ]
+}

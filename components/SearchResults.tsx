@@ -23,7 +23,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, isVisible, close
                             onClick={closeResults}
                                 className="relative w-full min-w-[250px] h-72 bg-eerie bg-cover bg-center rounded-lg overflow-hidden shadow-md group"
                                 style={{
-                                    backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`,
+                                    backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`
                                 }}
                                 href={`/movie/${movie.id}`}
                             >

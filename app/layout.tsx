@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto, Inter, Noto_Sans } from 'next/font/google';
+import Navbar from "@/common/ui/Navbar";
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -33,8 +34,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${inter.variable} ${notoSans.variable} bg-white dark:bg-black`}
-        >
+        className='flex flex-col bg-white dark:bg-black text-black dark:text-white'>
+        <Navbar />
         {children}
       </body>
     </html>

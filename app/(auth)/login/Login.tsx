@@ -24,9 +24,9 @@ export default function LoginForm() {
             showToast('error', `${error.message}`);
             setLoading(false)
         } else {
+            router.push('/dashboard');
             showToast('success', 'Login successful!');
             setLoading(false)
-            router.push('/dashboard');
         }
     };
 

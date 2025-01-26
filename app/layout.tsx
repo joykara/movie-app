@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto, Inter, Noto_Sans } from 'next/font/google';
 import Navbar from "@/common/ui/Navbar";
+import { ToastContainer } from "react-toastify";
+import LoadingLayout from '@/components/layouts/LoadingLayout';
+import { Suspense } from 'react';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -34,9 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className='flex flex-col bg-white dark:bg-black text-black dark:text-white'>
+        className={`${roboto.variable} ${inter.variable} ${notoSans.variable} flex flex-col bg-white dark:bg-black text-black dark:text-white`}>
         <Navbar />
-        {children}
+        <Suspense fallback={<LoadingLayout loading={true}>
+          <div />
+        </LoadingLayout>}>
+          <LoadingLayout loading={false}>
+            {children}
+          </LoadingLayout>
+        </Suspense>
+        <ToastContainer />
       </body>
     </html>
   );

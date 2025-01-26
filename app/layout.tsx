@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${inter.variable} ${notoSans.variable}`}
+        className={`${roboto.variable} ${inter.variable} ${notoSans.variable} bg-white dark:bg-black`}
         >
         {children}
       </body>

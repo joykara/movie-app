@@ -89,22 +89,22 @@ export default function AllMoviesComponent() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex justify-center mt-6 space-x-4">
+            <div className="flex justify-center my-6 space-x-4">
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`px-4 py-2 rounded-md ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-violet text-white'
+                    className={`px-4 py-2 rounded-md bg-violet ${currentPage === 1 ? 'cursor-not-allowed' : 'text-white'
                         }`}
                 >
                     Previous
                 </button>
-                <span className="px-4 py-2 text-sm bg-gray-200 rounded-md">
+                <span className="px-4 py-2 text-sm">
                     Page {currentPage} of {totalPages}
                 </span>
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`px-4 py-2 rounded-md ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-violet text-white'
+                    className={`px-4 py-2 rounded-md bg-violet ${currentPage === totalPages ? 'cursor-not-allowed' : 'text-white'
                         }`}
                 >
                     Next

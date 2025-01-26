@@ -77,7 +77,7 @@ export default function FeaturedMovies() {
                     <button
                         key={genre.id}
                         onClick={() => handleGenreSelect(genre.id)}
-                        className={`px-2 py-1 md:px-4 md:py-2 rounded-md text-sm ${selectedGenre === genre.id
+                        className={`px-2 py-1 md:px-4 md:py-2 max-w-36 rounded-md text-sm ${selectedGenre === genre.id
                             ? 'bg-violet text-white'
                             : 'bg-white  border border-violet text-black'
                             }`}

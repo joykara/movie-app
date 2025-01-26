@@ -1,5 +1,6 @@
 'use client'
 import { Button } from "@/data/interfaces/components"
+import Loader from "./loader"
 
 export default function CommonButton(props: Readonly<Button>) {
     return (
@@ -13,7 +14,7 @@ export default function CommonButton(props: Readonly<Button>) {
         >
             {props.loading ? (
                 <div className="flex items-center justify-center">
-                    <span className="ml-2">Loading...</span>
+                    <Loader size={40} />
                 </div>
             ) : (
                 `${props.title}`

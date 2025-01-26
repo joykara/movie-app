@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import Link from 'next/link';
 import { FaRegUserCircle } from 'react-icons/fa';
@@ -10,15 +10,15 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover';
 import SearchBar from '@/components/searchBar';
-import useOutsideClick from '@/hooks/useOutsideClick';
 import { Movie } from '@/data/interfaces/components';
-import { FcRating } from 'react-icons/fc';
+import { supabase } from '@/lib/supabaseClient';
 import SearchResults from '@/components/SearchResults';
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
     const [searchResults, setSearchResults] = useState<Movie[]>([]);
     const [isResultsVisible, setIsResultsVisible] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         if (isResultsVisible) {
@@ -31,6 +31,29 @@ export default function Navbar() {
             document.body.style.overflow = 'auto';
         };
     }, [isResultsVisible]);
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            setIsLoggedIn(!!user);
+        };
+
+        checkUser();
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setIsLoggedIn(!!session?.user);
+        });
+
+        return () => {
+            subscription?.unsubscribe();
+        };
+    }, []);
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        setIsLoggedIn(false);
+    };
+
     const resultsRef = useRef<HTMLDivElement>(null);
 
     const handleSearchResults = (results: Movie[]) => {
@@ -56,7 +79,7 @@ export default function Navbar() {
             </Link>
 
             <div className="flex items-center justify-end gap-2 md:gap-4">
-                <div className='hidden md:flex gap-x-4 mr-4'>
+                <div className="hidden md:flex gap-x-4 mr-4">
                     <Link
                         href={'/dashboard'}
                         className="font-noto text-sm md:text-base text-black dark:text-smoke hover:text-violet"
@@ -88,7 +111,7 @@ export default function Navbar() {
                     <PopoverTrigger>
                         <FaRegUserCircle className="w-6 h-6 fill-violet dark:fill-amber" />
                     </PopoverTrigger>
-                    <PopoverContent className='bg-white dark:bg-black'>
+                    <PopoverContent className="bg-white dark:bg-black">
                         <Link
                             href={'/dashboard'}
                             className="md:hidden block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
@@ -101,18 +124,21 @@ export default function Navbar() {
                         >
                             All movies
                         </Link>
-                        <Link
-                            href={'/login'}
-                            className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
-                        >
-                            Login
-                        </Link>
-                        <Link
-                            href={'/'}
-                            className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
-                        >
-                            Sign out
-                        </Link>
+                        {isLoggedIn ? (
+                            <button
+                                onClick={handleSignOut}
+                                className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
+                            >
+                                Sign out
+                            </button>
+                        ) : (
+                            <Link
+                                href={'/login'}
+                                className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
+                            >
+                                Login
+                            </Link>
+                        )}
                     </PopoverContent>
                 </Popover>
             </div>

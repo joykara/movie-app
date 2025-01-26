@@ -83,7 +83,6 @@ export default function AllMoviesComponent() {
                             (id: number) =>
                                 genres.find((genre: { id: number; name: string }) => genre.id === id)?.name ?? ''
                         ): []}
-                        onFavoriteClick={() => console.log('Add to Favorites:', movie.id)}
                     />
                 ))}
             </div>

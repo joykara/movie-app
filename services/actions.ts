@@ -1,4 +1,5 @@
 import { API_KEY, BASE_URL } from "@/utils/constants";
+import { supabase } from '@/lib/supabaseClient';
 
 // Search for movies by query
 export const searchMovies = async (query: string) => {
@@ -62,7 +63,6 @@ export const fetchMovieCredits = async (id: string) => {
     }
 };
 
-
 // Fetch trending movies
 export const fetchPlayingMovie = async () => {
     try {
@@ -95,6 +95,27 @@ export async function fetchMoviesByGenre(genreId: number, page = 1) {
     const data = await res.json();
     return {
         results: data.results,
-        totalPages: data.total_pages,
+        totalPages: data.total_pages
     };
+}
+
+//Fetch favorites
+export async function fetchFavorites() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return [];
+
+    const { data, error } = await supabase
+        .from('favorites')
+        .select('*')
+        .eq('user_id', user.id);
+
+    if (error) {
+        console.error('Error fetching favorites:', error.message);
+        return [];
+    }
+
+    return data.map((favorite) => ({
+        ...favorite,
+        genres: favorite.genres.split(', ')
+    }));
 }

@@ -32,7 +32,6 @@ export interface MovieCardProps {
     votes: number;
     runtime: number;
     genres?: string[];
-    onFavoriteClick?: () => void; // Add to Favorites
 }
 
 export interface MovieDetailsProps {

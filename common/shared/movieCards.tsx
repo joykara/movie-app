@@ -2,6 +2,8 @@ import { MovieCardProps } from '@/data/interfaces/components';
 import Link from 'next/link';
 import React from 'react';
 import { FcRating } from 'react-icons/fc';
+import { supabase } from '@/lib/supabaseClient';
+import { showToast } from '@/hooks/useToast';
 
 export default function MovieCard({
     id,
@@ -11,9 +13,38 @@ export default function MovieCard({
     rating,
     votes,
     runtime,
-    genres = [],
-    onFavoriteClick,
+    genres = []
 }: MovieCardProps) {
+    const handleFavoriteClick = async () => {
+        try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                showToast('error', 'You must be logged in to add favorites.');
+                return;
+            }
+
+            const { error } = await supabase
+                .from('favorites')
+                .insert({
+                    user_id: user.id,
+                    movie_id: id,
+                    title,
+                    poster_path: posterPath,
+                    release_date: releaseDate,
+                    rating,
+                    runtime,
+                    genres: genres.join(', '),
+                });
+
+            if (error) {
+                showToast('error', 'Error adding favorite:');
+            } else {
+                showToast('success', `${title} added to favorites!`);
+            }
+        } catch (err) {
+            showToast('error', 'An unexpected error occurred:');
+        }
+    };
 
     return (
         <div
@@ -49,8 +80,8 @@ export default function MovieCard({
                         View Details
                     </Link>
                     <button
-                        onClick={onFavoriteClick}
-                        className="px-3 py-1 bg-amber-400 text-black text-xs rounded-md hover:bg-amber-500 transition-colors"
+                        onClick={handleFavoriteClick}
+                        className="px-4 py-2 bg-violet text-white text-xs rounded-md hover:bg-amber transition-colors cursor-pointer"
                     >
                         Add to Favorites
                     </button>

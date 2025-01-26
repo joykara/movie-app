@@ -5,7 +5,7 @@ import React from 'react';
 import PuffLoader from 'react-spinners/PuffLoader';
 
 interface LoaderProps {
-    loading: boolean;
+    loading?: boolean;
     size?: number;
     color?: string;
 }

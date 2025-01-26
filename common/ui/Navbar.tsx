@@ -16,9 +16,21 @@ import SearchResults from '@/components/SearchResults';
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState<Movie[]>([]);
     const [isResultsVisible, setIsResultsVisible] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        if (isResultsVisible) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isResultsVisible]);
 
     useEffect(() => {
         const checkUser = async () => {

@@ -79,7 +79,7 @@ export default function LoginForm() {
                         Create Account
                     </Link>
                 </div>
-                <div className="">
+                {/* <div className="">
                     <Link
                         href="/forgot-password"
                         data-link="forgot_redirect"
@@ -87,7 +87,7 @@ export default function LoginForm() {
                     >
                         Forgot Password?
                     </Link>
-                </div>
+                </div> */}
             </div>
             <CommonButton
                 type="submit"

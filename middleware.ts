@@ -1,24 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from './lib/supabaseClient';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-    const protectedRoutes = ['/favourite-list'];
+export async function middleware(request: NextRequest) {
+    const res = NextResponse.next();
 
-    if (protectedRoutes.includes(request.nextUrl.pathname)) {
-        const token = request.cookies.get('sb-access-token')?.value;
+    const supabase = createMiddlewareClient({
+        req: request,
+        res
+    }
+    );
 
-        if (!token) {
-            // Redirect to login page if not authenticated
-            return NextResponse.redirect(new URL('/login', request.url));
+    try {
+        // Check auth state
+        const { data: { session }, error } = await supabase.auth.getSession();
+
+        // Protected routes
+        // if (request.nextUrl.pathname.startsWith('/favourite-list')) {
+        //     if (!session) {
+        //         return NextResponse.redirect(new URL('/login', request.url));
+        //     }
+        // }
+
+        // Redirect to dashboard if already logged in
+        if (request.nextUrl.pathname.startsWith('/login') ||
+            request.nextUrl.pathname.startsWith('/sign-up')) {
+            if (session) {
+                return NextResponse.redirect(new URL('/dashboard', request.url));
+            }
         }
-    }
-    const url = request.nextUrl;
 
-    // Remove access_token if present
-    if (url.hash && url.hash.includes('access_token')) {
-        url.hash = '';
-        return NextResponse.redirect(url);
+        return res;
+    } catch (e) {
+        console.error('Middleware error:', e);
+        return res;
     }
-
-    return NextResponse.next();
 }
+
+export const config = {
+    matcher: ['/favourite-list/:path*', '/login', '/sign-up']
+};

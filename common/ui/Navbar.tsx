@@ -114,13 +114,13 @@ export default function Navbar() {
                     <PopoverContent className="bg-white dark:bg-black">
                         <Link
                             href={'/dashboard'}
-                            className="md:hidden block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
+                            className="md:hidden block rounded-md py-2 px-3 text-center transition dark:text-smoke hover:bg-amber"
                         >
                             Home
                         </Link>
                         <Link
                             href={'/all-movies'}
-                            className="md:hidden block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
+                            className="md:hidden block rounded-md py-2 px-3 text-center transition dark:text-smoke hover:bg-amber"
                         >
                             All movies
                         </Link>
@@ -132,17 +132,17 @@ export default function Navbar() {
                                 >
                                     Sign out
                                 </button>
-                                <Link
+                                {/* <Link
                                 href={'/favourite-list'}
                                     className="block rounded-md py-2 px-3 w-full text-center transition dark:text-smoke hover:bg-amber"
                                 >
                                     Favorites
-                                </Link>
+                                </Link> */}
                             </div>
                         ) : (
                             <Link
                                 href={'/login'}
-                                className="block rounded-md py-2 px-3 transition dark:text-smoke hover:bg-amber"
+                                className="block rounded-md py-2 px-3 text-center transition dark:text-smoke hover:bg-amber"
                             >
                                 Login
                             </Link>

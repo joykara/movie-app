@@ -14,7 +14,7 @@ export default function CommonButton(props: Readonly<Button>) {
         >
             {props.loading ? (
                 <div className="flex items-center justify-center">
-                    <Loader size={40} />
+                    <Loader loading={true} size={10} color="white" />
                 </div>
             ) : (
                 `${props.title}`

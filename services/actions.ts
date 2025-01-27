@@ -105,7 +105,7 @@ export async function fetchFavorites() {
     if (!user) return [];
 
     const { data, error } = await supabase
-        .from('favorites')
+        .from('favourites')
         .select('*')
         .eq('user_id', user.id);
 
@@ -113,6 +113,7 @@ export async function fetchFavorites() {
         console.error('Error fetching favorites:', error.message);
         return [];
     }
+    console.log(data)
 
     return data.map((favorite) => ({
         ...favorite,

@@ -61,6 +61,7 @@ export default function LoginForm() {
                     />
                     <button
                         type="button"
+                        data-link="show_password"
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-black dark:text-smoke"
                     >

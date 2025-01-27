@@ -51,13 +51,13 @@ export default function MovieCard({
 
     return (
         <div
-            className="relative w-full min-w-[250px] h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group"
+            className="relative w-full min-w-[250px] h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group movie-card"
             style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterPath})`,
             }}
         >
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 text-black dark:text-smoke bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 flex flex-col justify-end p-4 opacity-100 shadow-md md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+            {/* Overlay - Always visible on mobile, hover on desktop */}
+            <div className="absolute inset-0 text-black dark:text-smoke bg-white/70 dark:bg-black/70 flex flex-col justify-end p-4 opacity-100 shadow-md transition-opacity duration-300 ease-in-out">
                 <h2 className="text-lg md:text-xl font-bold truncate mb-2">{title}</h2>
 
                 {genres.length > 0 && (
@@ -78,7 +78,8 @@ export default function MovieCard({
                 <div className="flex w-full gap-2">
                     <Link
                         href={`/movie/${id}`}
-                        className="px-4 py-2 bg-violet text-white text-xs rounded-md hover:bg-amber transition-colors cursor-pointer"
+                        data-testid={`movie-link-${id}`}
+                        className="px-4 py-2 bg-violet text-white text-xs rounded-md hover:bg-amber transition-colors"
                     >
                         View Details
                     </Link>

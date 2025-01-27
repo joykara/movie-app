@@ -31,6 +31,15 @@ A modern movie recommendation application built with Next.js, TypeScript, and Su
   - Supabase (Authentication & Database)
   - TMDB API (Movie Data)
 
+- **Testing**:
+  - Cypress (E2E Testing)
+  - Test Coverage:
+    - Authentication flows
+    - Navigation
+    - Search functionality
+    - Theme toggling
+    - Movie interactions
+
 - **State Management & Utilities**:
   - React Hooks
   - React Toastify
@@ -60,6 +69,56 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 4. Run the development server:
 ```bash
 npm run dev
+```
+
+## Testing 🧪
+
+### Running Tests
+
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. In a separate terminal, run Cypress:
+```bash
+npm run cy:open
+```
+
+### Test Suites
+
+- **Login Flow**:
+  - Form display validation
+  - Invalid credentials handling
+  - Password visibility toggle
+  - Navigation to signup
+  - Successful login
+
+- **Signup Flow**:
+  - Form display validation
+  - Navigation to login
+  - Account creation process
+
+- **Dashboard Flow**:
+  - Featured movies display
+  - Movie details navigation
+  - Search functionality
+  - Theme toggling
+  - Login redirection
+
+### Test Configuration
+
+Configure test credentials in `cypress.config.ts`:
+```typescript
+export default defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:3000',
+    env: {
+      TEST_USER_EMAIL: 'your-test-email@example.com',
+      TEST_USER_PASSWORD: 'your-test-password'
+    }
+  }
+})
 ```
 
 ## Project Structure 📁

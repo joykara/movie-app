@@ -30,7 +30,7 @@ export default function SignUp() {
     return (
         <form
             onSubmit={handleSignUp}
-            className="bg-violet/[.5] h-auto md:w-1/2 lg:w-1/3 m-auto md:p-14 lg:p-16 text-center z-10 bg-white-opacity rounded-md 2xl:p-20"
+            className="bg-violet/[.5] h-auto md:w-1/2 lg:w-1/3 m-auto p-8 md:p-14 lg:p-16 text-center z-10 bg-white-opacity rounded-md 2xl:p-20"
             action="javascript:void(0);"
         >
         <div>

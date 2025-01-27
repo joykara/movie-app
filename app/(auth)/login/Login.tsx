@@ -19,21 +19,24 @@ export default function LoginForm() {
         const password = form.get('password') as string;
         setLoading(true)
 
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
         if (error) {
             showToast('error', `${error.message}`);
             setLoading(false)
         } else {
+            router.push('/dashboard');
             showToast('success', 'Login successful!');
             setLoading(false)
-            router.push('/dashboard');
         }
     };
 
     return (
         <form
             onSubmit={handleLogin}
-            className="bg-violet/[.5] h-auto md:w-1/2 lg:w-1/3 m-auto md:p-14 lg:p-16 text-center z-10 bg-white-opacity rounded-md 2xl:p-20"
+            className="bg-violet/[.5] h-auto md:w-1/2 lg:w-1/3 m-auto p-8 md:p-14 lg:p-16 text-center z-10 bg-white-opacity rounded-md 2xl:p-20"
             action="javascript:void(0);"
         >
             <div>
@@ -76,7 +79,7 @@ export default function LoginForm() {
                         Create Account
                     </Link>
                 </div>
-                <div className="">
+                {/* <div className="">
                     <Link
                         href="/forgot-password"
                         data-link="forgot_redirect"
@@ -84,7 +87,7 @@ export default function LoginForm() {
                     >
                         Forgot Password?
                     </Link>
-                </div>
+                </div> */}
             </div>
             <CommonButton
                 type="submit"

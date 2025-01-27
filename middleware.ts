@@ -1,13 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
-    const url = request.nextUrl;
+export async function middleware(request: NextRequest) {
+    const res = NextResponse.next();
 
-    // Remove access_token if present
-    if (url.hash && url.hash.includes('access_token')) {
-        url.hash = '';
-        return NextResponse.redirect(url);
+    const supabase = createMiddlewareClient({
+        req: request,
+        res
     }
+    );
 
-    return NextResponse.next();
+    try {
+        // Check auth state
+        const { data: { session }, error } = await supabase.auth.getSession();
+
+        // Protected routes
+        // if (request.nextUrl.pathname.startsWith('/favourite-list')) {
+        //     if (!session) {
+        //         return NextResponse.redirect(new URL('/login', request.url));
+        //     }
+        // }
+
+        // Redirect to dashboard if already logged in
+        if (request.nextUrl.pathname.startsWith('/login') ||
+            request.nextUrl.pathname.startsWith('/sign-up')) {
+            if (session) {
+                return NextResponse.redirect(new URL('/dashboard', request.url));
+            }
+        }
+
+        return res;
+    } catch (e) {
+        console.error('Middleware error:', e);
+        return res;
+    }
 }
+
+export const config = {
+    matcher: ['/favourite-list/:path*', '/login', '/sign-up']
+};

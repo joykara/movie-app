@@ -25,7 +25,6 @@ export default function AllMoviesComponent() {
     useEffect(() => {
         async function getMovies() {
                     if (selectedGenre === null) {
-                        // Fetch all movies if no genre is selected
                         const movieData = await fetchAllMovies();
                         setMovies(movieData.results);
                     } else {
@@ -36,12 +35,11 @@ export default function AllMoviesComponent() {
         }
         getMovies();
     }, [selectedGenre, currentPage]);
-    console.log(movies)
 
     // Handle genre selection
     const handleGenreSelect = (genreId: number) => {
         setSelectedGenre(genreId);
-        setCurrentPage(1); // Reset to page 1 when genre changes
+        setCurrentPage(1);
     };
 
     // Handle pagination
@@ -83,7 +81,6 @@ export default function AllMoviesComponent() {
                             (id: number) =>
                                 genres.find((genre: { id: number; name: string }) => genre.id === id)?.name ?? ''
                         ): []}
-                        onFavoriteClick={() => console.log('Add to Favorites:', movie.id)}
                     />
                 ))}
             </div>

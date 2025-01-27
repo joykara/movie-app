@@ -32,7 +32,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     return (
         <div className="flex gap-x-2 items-center">
             <input
-                type="text"
+                type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search movies..."

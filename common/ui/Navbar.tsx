@@ -108,10 +108,10 @@ export default function Navbar() {
                 </button>
                 {/* Profile Icon */}
                 <Popover>
-                    <PopoverTrigger>
+                    <PopoverTrigger data-testid="user-menu">
                         <FaRegUserCircle className="w-6 h-6 fill-violet dark:fill-amber" />
                     </PopoverTrigger>
-                    <PopoverContent className="bg-white dark:bg-black">
+                    <PopoverContent className="bg-white dark:bg-black user-menu">
                         <Link
                             href={'/dashboard'}
                             className="md:hidden block rounded-md py-2 px-3 text-center transition dark:text-smoke hover:bg-amber"
@@ -125,7 +125,7 @@ export default function Navbar() {
                             All movies
                         </Link>
                         {isLoggedIn ? (
-                            <div className='flex flex-col w-full items-center'>
+                            <div className='flex flex-col w-full items-center user-menu'>
                                 <button
                                     onClick={handleSignOut}
                                     className="block rounded-md py-2 px-3 w-full transition dark:text-smoke hover:bg-amber"
@@ -141,6 +141,7 @@ export default function Navbar() {
                             </div>
                         ) : (
                             <Link
+                                data-testid="login-button"
                                 href={'/login'}
                                 className="block rounded-md py-2 px-3 text-center transition dark:text-smoke hover:bg-amber"
                             >

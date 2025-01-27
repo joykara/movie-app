@@ -51,7 +51,7 @@ export default function MovieCard({
 
     return (
         <div
-            className="relative w-full min-w-[250px] h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group"
+            className="relative w-full min-w-[250px] h-72 bg-cover bg-center rounded-lg overflow-hidden shadow-md group movie-card"
             style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/w500${posterPath})`,
             }}
@@ -78,7 +78,8 @@ export default function MovieCard({
                 <div className="flex w-full gap-2">
                     <Link
                         href={`/movie/${id}`}
-                        className="px-4 py-2 bg-violet text-white text-xs rounded-md hover:bg-amber transition-colors cursor-pointer"
+                        data-testid={`movie-link-${id}`}
+                        className="z-10 px-4 py-2 bg-violet text-white text-xs rounded-md hover:bg-amber"
                     >
                         View Details
                     </Link>

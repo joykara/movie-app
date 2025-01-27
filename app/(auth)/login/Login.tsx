@@ -19,9 +19,9 @@ export default function LoginForm() {
         const password = form.get('password') as string;
         setLoading(true)
 
-        const { data: { session }, error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
             email,
-            password,
+            password
         });
         if (error) {
             showToast('error', `${error.message}`);

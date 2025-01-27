@@ -1,6 +1,7 @@
 'use client'
 import { Movie } from '@/data/interfaces/components';
 import { fetchFavorites } from '@/services/actions';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 export default function FavouritesList() {
@@ -26,10 +27,12 @@ export default function FavouritesList() {
                     key={movie.id}
                     className="bg-white shadow-md rounded-lg p-4"
                 >
-                    <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    <Image
                         alt={movie.title}
-                        className="rounded-md"
+                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        width={700}
+                        height={700}
+                        className={` w-full xl:w-1/2 h-full xl:h-[95%] object-cover rounded-md mb-2`}
                     />
                     <h2 className="text-lg font-bold mt-2">{movie.title}</h2>
                     <p className="text-sm text-gray-600">

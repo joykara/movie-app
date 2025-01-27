@@ -13,13 +13,22 @@ import SearchBar from '@/components/searchBar';
 import { Movie } from '@/data/interfaces/components';
 import { supabase } from '@/lib/supabaseClient';
 import SearchResults from '@/components/SearchResults';
+import LoadingLayout from '@/components/layouts/LoadingLayout';
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
     const [searchResults, setSearchResults] = useState<Movie[]>([]);
     const [isResultsVisible, setIsResultsVisible] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000); // Simulates loading time (adjust as needed)
+
+        return () => clearTimeout(timer);
+    }, []);
     useEffect(() => {
         if (isResultsVisible) {
             document.body.style.overflow = 'hidden';
@@ -68,7 +77,7 @@ export default function Navbar() {
     return (
         <div
             onClick={closeResults}
-            className="sticky top-0 z-10 bg-white dark:bg-black bg-opacity-70 w-[100%] h-auto mx-auto flex flex-col gap-2 sm:flex-row justify-between items-center px-4 py-4 md:px-12"
+            className="sticky top-0 z-20 bg-white dark:bg-black bg-opacity-70 w-[100%] h-auto mx-auto flex flex-col gap-2 sm:flex-row justify-between items-center px-4 py-4 md:px-12"
         >
             {/* Logo */}
             <Link
@@ -153,7 +162,15 @@ export default function Navbar() {
             </div>
             {/* Search Results */}
             {isResultsVisible && searchResults.length > 0 && (
-                <SearchResults results={searchResults} isVisible={isResultsVisible} closeResults={closeResults} />
+                <div data-testid="search-results-container" className="absolute top-full left-0 right-0">
+                    <LoadingLayout loading={loading}>
+                        <SearchResults
+                            results={searchResults}
+                            isVisible={isResultsVisible}
+                            closeResults={closeResults}
+                        />
+                    </LoadingLayout>
+                </div>
             )}
 
             {/* No Results */}

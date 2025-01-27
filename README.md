@@ -1,6 +1,6 @@
 # Movierex 🎬
-
-A modern movie recommendation application built with Next.js, TypeScript, and Supabase.
+- **Objective**: 
+Design and implement a simple movie recommendation application using Next.js, TypeScript, and Supabase.
 
 ## Features 🌟
 

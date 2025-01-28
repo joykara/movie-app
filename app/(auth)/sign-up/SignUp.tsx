@@ -17,13 +17,25 @@ export default function SignUp() {
         const password = form.get('password') as string;
         setLoading(true)
 
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) {
-            showToast('error', `${error.message}`);
-            setLoading(false)
-        } else {
-            showToast('success', 'Check your email for the confirmation link!');
-            setLoading(false)
+        try {
+            const { error } = await supabase.auth.signUp({ email, password });
+            if (error) {
+                if (error.status === 409 || error.message.includes("already registered")) {
+                    showToast('error', 'This email is already registered. Please log in.');
+                }
+                else if (error.message.includes('Password should be at least')) {
+                    showToast('error', error.message);
+                }
+                else {
+                    showToast('error', 'An error occurred during sign-up. Please try again.');
+                }
+            } else {
+                showToast('success', 'Check your email for the confirmation link!');
+            }
+        } catch (err) {
+            showToast('error', 'An unexpected error occurred. Please try again later.');
+        } finally {
+            setLoading(false);
         }
     };
 

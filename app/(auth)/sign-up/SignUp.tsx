@@ -18,22 +18,23 @@ export default function SignUp() {
         setLoading(true)
 
         try {
-            const { error } = await supabase.auth.signUp({ email, password });
-            if (error) {
-                if (error.status === 409 || error.message.includes("already registered")) {
-                    showToast('error', 'This email is already registered. Please log in.');
-                }
-                else if (error.message.includes('Password should be at least')) {
-                    showToast('error', error.message);
-                }
-                else {
-                    showToast('error', 'An error occurred during sign-up. Please try again.');
-                }
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                showToast('error', result.message || 'An error occurred. Please try again.');
             } else {
-                showToast('success', 'Check your email for the confirmation link!');
+                showToast('success', result.message);
             }
-        } catch (err) {
-            showToast('error', 'An unexpected error occurred. Please try again later.');
+        } catch (error: any) {
+            showToast('error', 'An unexpected error occurred. Please try again.');
         } finally {
             setLoading(false);
         }

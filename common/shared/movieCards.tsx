@@ -57,7 +57,7 @@ export default function MovieCard({
             }}
         >
             {/* Overlay - Always visible on mobile, hover on desktop */}
-            <div className="absolute inset-0 text-black dark:text-smoke bg-white/70 dark:bg-black/70 flex flex-col justify-end p-4 opacity-100 shadow-md transition-opacity duration-300 ease-in-out">
+            <div className="absolute inset-0 text-black dark:text-smoke bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 flex flex-col justify-end p-4 opacity-100 shadow-md md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                 <h2 className="text-lg md:text-xl font-bold truncate mb-2">{title}</h2>
 
                 {genres.length > 0 && (

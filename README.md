@@ -1,4 +1,6 @@
 # Movierex 🎬
+- **Summary**:
+- A project submission in reference to Savannah's web developer role
 - **Objective**: 
 Design and implement a simple movie recommendation application built with Next.js, TypeScript, and Supabase.
 

@@ -1,4 +1,4 @@
-# Movierex 🎬
+# Movierex 
 - **Summary**:
 - A project submission in reference to Savannah's web developer role
 - **Objective**: 
@@ -21,7 +21,6 @@ Design and implement a simple movie recommendation application built with Next.j
   - Cast information
 
 ## Tech Stack 💻
-
 - **Frontend**:
   - Next.js 14 (App Router)
   - TypeScript
@@ -47,11 +46,10 @@ Design and implement a simple movie recommendation application built with Next.j
   - React Toastify
   - Custom Hooks
 
-## Getting Started 🚀
-
+## Getting Started 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/movierex.git
+git clone https://github.com/joykara/movierex.git
 ```
 
 2. Install dependencies:
@@ -74,9 +72,7 @@ npm run dev
 ```
 
 ## Testing 🧪
-
 ### Running Tests
-
 1. Start the development server:
 ```bash
 npm run dev
@@ -88,7 +84,6 @@ npm run cy:open
 ```
 
 ### Test Suites
-
 - **Login Flow**:
   - Form display validation
   - Invalid credentials handling
@@ -123,7 +118,7 @@ export default defineConfig({
 })
 ```
 
-## Project Structure 📁
+## Project Structure 
 ```bash
 movierex/
 ├── app/ # Next.js app router pages
@@ -138,8 +133,7 @@ movierex/
 └── utils/ # Utility functions
 ```
 
-## Key Features in Detail 🔍
-
+## Key Features in Detail 
 ### Authentication
 - Email/Password authentication
 - Protected routes
@@ -161,15 +155,8 @@ movierex/
 - Custom button components
 - Movie cards with hover effects
 
-## Contributing 🤝
+## Contributing 
 No contributions at the moment
 
-## License 📄
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments 🙏
-
-- TMDB API for movie data
-- Supabase for backend services
-- Next.js team for the amazing framework
+## Figma wireframe 
+- [Figma link](https://www.figma.com/design/Hi0pZsDuibfLE5sacgRjPt/MovieRex?node-id=0-1&t=HQjUhXrl4KfX1eju-1)
